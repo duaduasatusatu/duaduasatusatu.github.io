@@ -3,630 +3,318 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b0b0b" />
+  <meta name="theme-color" content="#07080f" />
   <meta name="description" content="Landing page game tembak ikan. Pilih server gacor dan main sekarang." />
-  <title>Tembak Ikan Gacor — Main Sekarang</title>
-
-  <style>
-    :root{
-      --bg:#070707;
-      --panel:#111;
-      --panel2:#0f0f0f;
-      --text:#f2f2f2;
-      --muted:#bdbdbd;
-      --brand:#ffcc00;
-      --brand2:#00ffcc;
-      --success:#4caf50;
-      --warning:#ff9800;
-      --danger:#f44336;
-      --shadow: 0 16px 45px rgba(0,0,0,.55);
-      --ring: rgba(255,204,0,.35);
-      --radius:16px;
-      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-
-    *{ box-sizing:border-box; margin:0; padding:0; }
-    html,body{ height:100%; }
-    body{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background:
-        radial-gradient(1200px 500px at 20% -10%, rgba(255,204,0,.22), transparent 55%),
-        radial-gradient(900px 420px at 90% 0%, rgba(0,255,204,.16), transparent 55%),
-        linear-gradient(180deg, #070707, #000 65%);
-      color:var(--text);
-      overflow-x:hidden;
-      position:relative;
-      min-height:100vh;
-    }
-
-    /* ===== WRAP ===== */
-    .wrap{
-      max-width:820px;
-      margin:0 auto;
-      padding:0 16px 48px;
-      position:relative;
-      z-index:1;
-    }
-
-    /* ===== ANIMASI IKAN & KOIN ===== */
-    .floating-elements{
-      position:fixed;
-      top:0;left:0;width:100%;height:100%;
-      pointer-events:none;
-      z-index:0;
-    }
-    .fish,.coin{
-      position:absolute;
-      opacity:0.6;
-      filter: drop-shadow(0 0 5px rgba(255,204,0,0.3));
-    }
-    .fish{
-      font-size:36px;
-      animation: swim linear infinite;
-    }
-    .coin{
-      font-size:20px;
-      animation: fall ease-in-out infinite;
-    }
-    @keyframes swim{
-      0%{ transform: translateX(110vw) translateY(0) scaleX(-1); opacity:0; }
-      5%{ opacity:0.6; }
-      95%{ opacity:0.6; }
-      100%{ transform: translateX(-100px) translateY(30vh) scaleX(-1); opacity:0; }
-    }
-    @keyframes fall{
-      0%{ transform: translateY(-60px) rotate(0deg); opacity:0; }
-      15%{ opacity:0.8; }
-      85%{ opacity:0.8; }
-      100%{ transform: translateY(110vh) rotate(360deg); opacity:0; }
-    }
-
-    /* ===== HEADER ===== */
-    header{
-      text-align:center;
-      padding:48px 0 24px;
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      background:rgba(255,204,0,.1);
-      border:1px solid rgba(255,204,0,.25);
-      border-radius:999px;
-      padding:6px 14px;
-      font-size:12px;
-      font-weight:600;
-      color:var(--brand);
-      margin-bottom:20px;
-      letter-spacing:.5px;
-      text-transform:uppercase;
-    }
-    .dot{
-      width:8px;height:8px;
-      border-radius:50%;
-      background:var(--brand);
-      box-shadow:0 0 8px var(--brand);
-      animation:blink 1.5s infinite;
-    }
-    @keyframes blink{
-      0%,100%{ opacity:1; }
-      50%{ opacity:0.3; }
-    }
-    header h1{
-      font-size:clamp(24px,5vw,42px);
-      font-weight:900;
-      line-height:1.15;
-      letter-spacing:-0.5px;
-      background:linear-gradient(135deg, #ffcc00, #ff9800 40%, #00ffcc);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
-      margin-bottom:14px;
-    }
-    .subtitle{
-      font-size:clamp(15px,2.5vw,18px);
-      color:var(--muted);
-      line-height:1.6;
-    }
-
-    /* ===== CARD ===== */
-    .card{
-      background:var(--panel);
-      border:1px solid rgba(255,255,255,.07);
-      border-radius:var(--radius);
-      padding:24px;
-      box-shadow:var(--shadow);
-    }
-    .card h2{
-      font-size:clamp(16px,3vw,22px);
-      font-weight:800;
-      line-height:1.3;
-      margin-bottom:16px;
-    }
-    .card h4{
-      font-size:16px;
-      font-weight:700;
-      margin-bottom:10px;
-      color:var(--brand);
-    }
-    .card p{
-      color:var(--muted);
-      line-height:1.7;
-      font-size:14px;
-    }
-
-    /* ===== BULLETS ===== */
-    .bullets{
-      list-style:none;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-    .bullets li{
-      display:flex;
-      align-items:flex-start;
-      gap:8px;
-      font-size:14px;
-      color:var(--muted);
-      line-height:1.5;
-    }
-    .bullets li::before{
-      content:'✔';
-      color:var(--brand2);
-      font-size:13px;
-      flex-shrink:0;
-      margin-top:2px;
-    }
-
-    /* ===== DIVIDER ===== */
-    .divider{
-      height:1px;
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
-      margin:18px 0;
-    }
-
-    /* ===== CTA ===== */
-    .cta{
-      display:block;
-      width:100%;
-      padding:16px 24px;
-      border-radius:12px;
-      background:linear-gradient(135deg, #ffcc00, #ff9800);
-      color:#111;
-      font-weight:900;
-      font-size:clamp(15px,3vw,18px);
-      text-align:center;
-      text-decoration:none;
-      letter-spacing:.5px;
-      box-shadow:0 12px 35px rgba(255,204,0,.3);
-      transition:var(--transition);
-      position:relative;
-      overflow:hidden;
-    }
-    .cta:hover{
-      transform:translateY(-2px) scale(1.02);
-      box-shadow:0 18px 45px rgba(255,204,0,.45);
-    }
-    .cta:active{ transform:scale(0.98); }
-
-    /* ===== HERO ===== */
-    .hero{ margin-bottom:32px; }
-    .hero-inner{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-    }
-    @media(max-width:620px){
-      .hero-inner{ grid-template-columns:1fr; }
-    }
-    .cta-panel{
-      display:flex;
-      flex-direction:column;
-      gap:16px;
-      justify-content:center;
-    }
-
-    /* ===== LIVE COUNTER ===== */
-    .live-counter{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      background:rgba(0,0,0,0.5);
-      padding:10px 16px;
-      border-radius:999px;
-      font-weight:700;
-      color:#fff;
-      font-size:14px;
-      border:1px solid rgba(0,255,204,0.25);
-      box-shadow:0 0 20px rgba(0,255,204,0.1);
-    }
-    .live-dot{
-      width:8px;height:8px;
-      border-radius:50%;
-      background:#00ffcc;
-      box-shadow:0 0 8px #00ffcc;
-      animation:blink 1s infinite;
-      flex-shrink:0;
-    }
-
-    /* ===== SECTION ===== */
-    .section{
-      margin-bottom:32px;
-    }
-    .section-head{
-      margin-bottom:16px;
-    }
-    .section-head h3{
-      font-size:clamp(16px,3vw,20px);
-      font-weight:800;
-      color:var(--brand);
-    }
-
-    /* ===== SERVER GRID ===== */
-    .server-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
-      gap:12px;
-    }
-    .server{
-      background:var(--panel2);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:12px;
-      padding:16px;
-      text-decoration:none;
-      color:var(--text);
-      position:relative;
-      transition:var(--transition);
-      display:block;
-    }
-    .server:hover{
-      border-color:rgba(255,204,0,.35);
-      background:#161616;
-      transform:translateY(-2px);
-      box-shadow:0 8px 24px rgba(0,0,0,.4);
-    }
-    .server .top{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      margin-bottom:6px;
-      flex-wrap:wrap;
-    }
-    .server .label{
-      font-weight:700;
-      font-size:14px;
-      flex:1;
-      min-width:0;
-    }
-    .pill{
-      font-size:10px;
-      font-weight:800;
-      padding:2px 8px;
-      border-radius:999px;
-      color:#fff;
-      letter-spacing:.5px;
-      text-transform:uppercase;
-      flex-shrink:0;
-    }
-    .server .desc{
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.5;
-    }
-    .status-indicator{
-      position:absolute;
-      top:-4px;right:-4px;
-      width:10px;height:10px;
-      border-radius:50%;
-      background:var(--success);
-      box-shadow:0 0 0 0 rgba(76,175,80,0.5);
-      animation:serverPulse 2s infinite;
-    }
-    @keyframes serverPulse{
-      0%{ box-shadow:0 0 0 0 rgba(76,175,80,0.6); }
-      70%{ box-shadow:0 0 0 6px rgba(76,175,80,0); }
-      100%{ box-shadow:0 0 0 0 rgba(76,175,80,0); }
-    }
-
-    /* ===== TESTIMONIAL ===== */
-    .testimonial-slider{
-      position:relative;
-      min-height:100px;
-    }
-    .testimonial-slide{
-      position:absolute;
-      top:0;left:0;width:100%;
-      opacity:0;
-      transition:opacity 0.6s ease;
-      background:var(--panel);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:12px;
-      padding:18px 20px;
-    }
-    .testimonial-slide.active{
-      opacity:1;
-      position:relative;
-    }
-    .testimonial-slide blockquote{
-      font-style:italic;
-      color:var(--muted);
-      margin:0 0 10px;
-      line-height:1.6;
-      font-size:14px;
-    }
-    .testimonial-slide .name{
-      font-weight:700;
-      color:var(--brand2);
-      font-size:13px;
-      display:flex;
-      align-items:center;
-      gap:6px;
-    }
-
-    /* ===== FEATURE GRID ===== */
-    .feature{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-    }
-    @media(max-width:540px){
-      .feature{ grid-template-columns:1fr; }
-    }
-
-    /* ===== SMALL NOTE ===== */
-    .small-note{
-      font-size:12px;
-      color:#666;
-      text-align:center;
-      line-height:1.5;
-    }
-
-    /* ===== FOOTER ===== */
-    footer{
-      text-align:center;
-      padding:32px 0 16px;
-      border-top:1px solid rgba(255,255,255,.05);
-    }
-    footer p{
-      color:#555;
-      font-size:13px;
-    }
-
-    /* ===== SOUND TOGGLE ===== */
-    .sound-toggle{
-      position:fixed;
-      bottom:20px;right:20px;
-      width:44px;height:44px;
-      background:rgba(20,20,20,0.85);
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      z-index:1000;
-      transition:var(--transition);
-      border:2px solid rgba(255,255,255,.1);
-      backdrop-filter:blur(8px);
-    }
-    .sound-toggle:hover{
-      border-color:var(--brand);
-      transform:scale(1.1);
-    }
-    .sound-toggle.muted{ opacity:0.5; }
-    .sound-toggle svg{ width:20px;height:20px;fill:var(--text); }
-  </style>
+  <title>Tembak Ikan — Pilih Server & Main Sekarang</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script defer src="./script.js"></script>
 </head>
 
 <body>
-  <!-- ANIMASI LATAR -->
-  <div class="floating-elements" aria-hidden="true">
-    <div class="fish" style="top:15%;animation-duration:16s;animation-delay:0s;">🐠</div>
-    <div class="fish" style="top:45%;animation-duration:13s;animation-delay:4s;">🐡</div>
-    <div class="fish" style="top:70%;animation-duration:20s;animation-delay:8s;">🐟</div>
-
-    <div class="coin" style="left:5%;animation-duration:3s;animation-delay:0s;">🪙</div>
-    <div class="coin" style="left:25%;animation-duration:2.5s;animation-delay:0.8s;">🪙</div>
-    <div class="coin" style="left:55%;animation-duration:3.5s;animation-delay:0.3s;">🪙</div>
-    <div class="coin" style="left:75%;animation-duration:2.8s;animation-delay:1.2s;">🪙</div>
-    <div class="coin" style="left:90%;animation-duration:3.2s;animation-delay:0.6s;">🪙</div>
+  <!-- Background -->
+  <div class="bg-layer" aria-hidden="true">
+    <div class="bg-grid"></div>
+    <div class="bg-orb bg-orb--1"></div>
+    <div class="bg-orb bg-orb--2"></div>
+    <div class="bg-orb bg-orb--3"></div>
   </div>
 
-  <!-- TOMBOL SUARA -->
-  <button class="sound-toggle" id="soundToggle" aria-label="Aktifkan/Nonaktifkan suara">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-  </button>
+  <!-- Particles -->
+  <div class="particles" aria-hidden="true">
+    <span style="left:12%; animation-delay:-2s;"></span>
+    <span style="left:28%; animation-delay:-6s;"></span>
+    <span style="left:45%; animation-delay:-1s;"></span>
+    <span style="left:62%; animation-delay:-8s;"></span>
+    <span style="left:77%; animation-delay:-4s;"></span>
+    <span style="left:90%; animation-delay:-7s;"></span>
+  </div>
+
+  <!-- Topbar -->
+  <header class="topbar" aria-label="Navigation">
+    <div class="wrapbar">
+      <div class="topbar-left">
+        <div class="badge" aria-label="Status">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Server aktif · Mobile friendly</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <a class="iconbtn" href="https://t.me/mfishingirl" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          <span aria-hidden="true">✈️</span>
+          <span class="iconbtn-t">Telegram</span>
+        </a>
+        <a class="iconbtn" href="https://x.com/leafia.chan" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <span aria-hidden="true">𝕏</span>
+          <span class="iconbtn-t">X</span>
+        </a>
+        <button class="iconbtn iconbtn--login" type="button" id="btnOpenMember" aria-haspopup="dialog">
+          <span aria-hidden="true">🔒</span>
+          <span class="iconbtn-t">Member</span>
+        </button>
+      </div>
+    </div>
+  </header>
 
   <div class="wrap">
-    <!-- HEADER -->
-    <header>
-      <div class="badge" aria-label="Status aktif">
-        <span class="dot" aria-hidden="true"></span>
-        Server gacor aktif sekarang
-      </div>
-      <h1>🔥 TEMBAK IKAN GACOR — KOIN MELIMPAH TANPA BATAS 🔥</h1>
-      <p class="subtitle">
-        Sekali tembak... langsung hujan koin 💰<br/>
-        Game viral yang bikin nagih tiap hari!
-      </p>
-    </header>
+    <main>
+      <a class="skip" href="#serverSection">Skip ke server</a>
 
-    <!-- HERO -->
-    <section class="hero" aria-label="Promo utama">
-      <div class="hero-inner">
-        <div class="card hero-promo">
-          <h2>🐟 Tembak ikan besar… BOOM! Koin berjatuhan 😳</h2>
-          <ul class="bullets">
-            <li>Sensasi seru yang bikin pengen lagi dan lagi</li>
-            <li>Gameplay cepat &amp; simpel, langsung bisa main</li>
-            <li>Jackpot ikan besar &amp; bonus setiap hari</li>
-          </ul>
-          <div class="divider" role="presentation"></div>
-          <p class="small-note">Main untuk hiburan. Gunakan dengan bijak 🎮</p>
-        </div>
-
-        <div class="card cta-panel">
-          <div class="live-counter" id="liveCounter" aria-live="polite">
-            <span class="live-dot" aria-hidden="true"></span>
-            <span><span id="winCount">1.248</span> kemenangan hari ini</span>
-          </div>
-
-          <a class="cta"
-             href="https://h5.vo7770.com?chn=aDVfdm83NzdfY3Qz&id=NDM3OTAzMjMx"
-             target="_blank" rel="noopener noreferrer"
-             id="mainCta">
-            🚀 MAIN SEKARANG
-          </a>
-          <p class="small-note">Klik tombol untuk langsung masuk ke server pilihan.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVER LIST -->
-    <section class="section" aria-label="Pilih server">
-      <div class="section-head">
-        <h3>🎮 PILIH SERVER GACOR</h3>
-      </div>
-      <div class="server-grid">
-        <a class="server" href="https://h5.vo7770.com?chn=aDVfdm83NzdfY3Qz&id=NDM3OTAzMjMx" target="_blank" rel="noopener noreferrer">
-          <div class="status-indicator" aria-label="Online"></div>
-          <div class="top">
-            <div class="label">🎯 VO777 — Server Ramai</div>
-            <span class="pill" style="background:#ff5722;">HOT</span>
-          </div>
-          <div class="desc">Populer &amp; ramai pemain, jackpot sering keluar.</div>
-        </a>
-        <a class="server" href="https://h5.vo7770.com?chn=aDVfdm83NzdfY3Qz&id=NDM3OTAzMjMx" target="_blank" rel="noopener noreferrer">
-          <div class="status-indicator" aria-label="Online"></div>
-          <div class="top">
-            <div class="label">⚡ Server Kilat</div>
-            <span class="pill" style="background:#2196f3;">CEPAT</span>
-          </div>
-          <div class="desc">Koneksi stabil, minim lag saat jackpot besar.</div>
-        </a>
-        <a class="server" href="https://h5.vo7770.com?chn=aDVfdm83NzdfY3Qz&id=NDM3OTAzMjMx" target="_blank" rel="noopener noreferrer">
-          <div class="status-indicator" aria-label="Online"></div>
-          <div class="top">
-            <div class="label">🏆 Server VIP</div>
-            <span class="pill" style="background:#9c27b0;">VIP</span>
-          </div>
-          <div class="desc">Khusus pemain aktif, hadiah lebih besar.</div>
-        </a>
-        <a class="server" href="https://h5.vo7770.com?chn=aDVfdm83NzdfY3Qz&id=NDM3OTAzMjMx" target="_blank" rel="noopener noreferrer">
-          <div class="status-indicator" aria-label="Online"></div>
-          <div class="top">
-            <div class="label">🌊 Server Baru</div>
-            <span class="pill" style="background:#4caf50;">BARU</span>
-          </div>
-          <div class="desc">Server fresh, rate jackpot masih tinggi!</div>
-        </a>
-      </div>
-    </section>
-
-    <!-- TESTIMONIAL -->
-    <section class="section" aria-label="Ulasan pemain">
-      <div class="section-head">
-        <h3>💬 Kata Mereka</h3>
-      </div>
-      <div class="testimonial-slider" id="testimonialSlider" aria-live="polite">
-        <div class="testimonial-slide active">
-          <blockquote>"Jackpot ikan raja keluar 3x dalam 10 menit! Seru banget mainnya."</blockquote>
-          <div class="name">👤 Budi J. — Surabaya</div>
-        </div>
-        <div class="testimonial-slide">
-          <blockquote>"Bonus harian bikin saldo naik terus setiap pagi. Recommended!"</blockquote>
-          <div class="name">👤 Siti R. — Bandung</div>
-        </div>
-        <div class="testimonial-slide">
-          <blockquote>"Server VO777 paling stabil, tidak pernah lag saat jackpot besar."</blockquote>
-          <div class="name">👤 Ahmad F. — Jakarta</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- KENAPA COBA -->
-    <section class="section" aria-label="Keunggulan">
-      <div class="feature">
-        <div class="card">
-          <h4>🔥 Kenapa Harus Coba?</h4>
-          <p>
-            💰 Koin gampang didapat<br/>
-            ⚡ Gameplay cepat &amp; simpel<br/>
-            🐋 Jackpot ikan besar<br/>
-            🎁 Bonus setiap hari
-          </p>
-        </div>
-        <div class="card">
-          <h4>👀 Ribuan Pemain Aktif</h4>
-          <p>Udah banyak yang coba dan balik lagi tiap hari. Kamu siap ikut panen koin?</p>
-          <div class="divider" role="presentation"></div>
-          <a class="cta"
-             style="background:linear-gradient(90deg,#ff4081,#7c4dff);box-shadow:0 18px 40px rgba(124,77,255,.25);"
+      <!-- Hero Header -->
+      <section class="header-block" aria-label="Judul utama">
+        <span class="eyebrow">Game Tembak Ikan</span>
+        <h1 class="title-glow">
+          Tembak Ikan,<br>
+          <span class="title-accent">Hujan Koin</span>
+        </h1>
+        <p class="subtitle">
+          Gameplay cepat &amp; simpel, jackpot ikan besar, bonus setiap hari.
+          Pilih server favoritmu dan mulai sekarang.
+        </p>
+        <div class="header-actions">
+          <a class="cta cta--hero"
              href="https://h5.vo7770.com?chn=aDVfdm83NzdfY3Qz&id=NDM3OTAzMjMx"
              target="_blank" rel="noopener noreferrer">
-            🚀 MAIN SEKARANG
+            ▶&ensp;Main Sekarang
           </a>
-          <p class="small-note" style="margin-top:10px;">(Link dibuka di tab baru.)</p>
+          <button class="cta cta--ghost" type="button" id="btnCopyTelegram">
+            Copy @mfishingirl
+          </button>
+        </div>
+      </section>
+
+      <!-- Hero Promo -->
+      <section class="hero" aria-label="Promo utama">
+        <div class="hero-inner">
+          <div class="card hero-promo">
+            <h2>Sekali tembak ikan besar — koin berjatuhan 🐟</h2>
+            <ul class="bullets">
+              <li>Sensasi seru yang bikin kamu terus balik lagi</li>
+              <li>Gameplay cepat, kontrol simpel, langsung seru</li>
+              <li>Jackpot ikan besar &amp; bonus aktif tiap hari</li>
+            </ul>
+            <div class="divider"></div>
+            <p class="small-note">Main untuk hiburan. Nikmati dengan bijak 🎮</p>
+          </div>
+          <div class="card cta-panel">
+            <a class="cta cta-variant-2"
+               href="https://h5.vo7770.com?chn=aDVfdm83NzdfY3Qz&id=NDM3OTAzMjMx"
+               target="_blank" rel="noopener noreferrer">
+              ▶&ensp;Main Sekarang
+            </a>
+            <p class="small-note">Klik untuk langsung masuk ke server pilihan.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Server Section -->
+      <section id="serverSection" class="section" aria-label="Pilih server">
+        <div class="section-head">
+          <div>
+            <span class="section-label">Daftar Server</span>
+            <h3>Pilih Server Gacor</h3>
+          </div>
+        </div>
+
+        <div class="server-grid">
+          <a class="server" href="https://h5.vo7770.com?chn=aDVfdm83NzdfY3Qz&id=NDM3OTAzMjMx" target="_blank" rel="noopener noreferrer">
+            <div class="top">
+              <div class="label">VO777 — Server Ramai</div>
+              <span class="pill" style="background:rgba(239,68,68,.75);">HOT</span>
+            </div>
+            <div class="desc">Populer &amp; ramai pemain. Cocok buat kamu yang suka sesi cepat.</div>
+            <div class="server-detail"><span class="server-detail-k">Fokus:</span> Ramai + respons cepat</div>
+          </a>
+
+          <a class="server" href="https://h5.e88id.com/?chn=bnRfZTg4X2N0Mw==&id=NzcxNTU3ODQ1" target="_blank" rel="noopener noreferrer">
+            <div class="top">
+              <div class="label">E88 — Bonus Harian</div>
+              <span class="pill" style="background:rgba(236,72,153,.75);">BONUS</span>
+            </div>
+            <div class="desc">Kejar bonus harian terbaik. Fokus ke hadiah yang konsisten.</div>
+            <div class="server-detail"><span class="server-detail-k">Fokus:</span> Bonus harian</div>
+          </a>
+
+          <a class="server" href="https://h5.v98id.com?chn=djk4X2lkNl9udGxhMjE2&id=MTI0OTIyOTAy" target="_blank" rel="noopener noreferrer">
+            <div class="top">
+              <div class="label">V98 — Jackpot Tinggi</div>
+              <span class="pill" style="background:rgba(139,92,246,.75);">JACKPOT</span>
+            </div>
+            <div class="desc">Target jackpot ikan besar. Cocok buat berburu puncak.</div>
+            <div class="server-detail"><span class="server-detail-k">Fokus:</span> Jackpot tinggi</div>
+          </a>
+
+          <a class="server" href="https://h5.x88vip.asia?chn=bnRfeDg4OF9jdDM=&id=NjUyNjkzODY4" target="_blank" rel="noopener noreferrer">
+            <div class="top">
+              <div class="label">X88VIP — Event Premium</div>
+              <span class="pill" style="background:rgba(59,130,246,.75);">VIP</span>
+            </div>
+            <div class="desc">Event premium &amp; kesempatan lebih. Cocok untuk yang cari edge.</div>
+            <div class="server-detail"><span class="server-detail-k">Fokus:</span> Event + peluang</div>
+          </a>
+
+          <a class="server" href="https://h5.l777id.com?chn=bDc3N19pZDVfbnRsYTIzNw%3D%3D&id=MzE4ODQ4Mjk4" target="_blank" rel="noopener noreferrer">
+            <div class="top">
+              <div class="label">L777 — Player Aktif</div>
+              <span class="pill" style="background:rgba(20,184,166,.75);">ACTIVE</span>
+            </div>
+            <div class="desc">Semarak &amp; pemain aktif. Cocok buat kamu yang suka suasana ramai.</div>
+            <div class="server-detail"><span class="server-detail-k">Fokus:</span> Aktivitas tinggi</div>
+          </a>
+
+          <a class="server" href="https://h5.rr777.co?chn=cnI3NzdfaWQ3X250bGExMzY%3D&id=NzM3Njk5NzY5" target="_blank" rel="noopener noreferrer">
+            <div class="top">
+              <div class="label">RR777 — Server Cepat</div>
+              <span class="pill" style="background:rgba(249,115,22,.75);">FAST</span>
+            </div>
+            <div class="desc">Respons cepat buat main nyaman. Ideal buat sesi santai.</div>
+            <div class="server-detail"><span class="server-detail-k">Fokus:</span> Stabil + cepat</div>
+          </a>
+
+          <a class="server" href="https://h5.cv777.asia?chn=Y3Y3NzdfaWQ1X250bGExMDU%3D&id=NzQ1Nzk0MTEx" target="_blank" rel="noopener noreferrer">
+            <div class="top">
+              <div class="label">CV777 — Bonus Member Baru</div>
+              <span class="pill" style="background:rgba(34,197,94,.75);">NEW</span>
+            </div>
+            <div class="desc">Bonus khusus member baru. Cocok buat fresh start.</div>
+            <div class="server-detail"><span class="server-detail-k">Fokus:</span> Bonus awal</div>
+          </a>
+
+          <div class="server" role="note" aria-label="Tips memilih server">
+            <div class="top">
+              <div class="label">Tips Memilih</div>
+              <span class="pill" style="background:rgba(100,116,139,.6);">INFO</span>
+            </div>
+            <div class="desc">Pilih server sesuai gaya main: ramai, bonus harian, jackpot, atau event VIP.</div>
+            <div class="server-detail"><span class="server-detail-k">Saran:</span> Cek fokus lalu coba.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature -->
+      <section class="section" aria-label="Kenapa coba">
+        <div class="section-head">
+          <div>
+            <span class="section-label">Keunggulan</span>
+            <h3>Kenapa Harus Coba?</h3>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="card">
+            <h4>Gameplay yang Nagih</h4>
+            <p>
+              Koin gampang didapat tiap sesi.<br>
+              Gameplay cepat &amp; kontrol simpel.<br>
+              Jackpot ikan besar menanti.<br>
+              Bonus aktif setiap harinya.
+            </p>
+          </div>
+          <div class="card">
+            <h4>Komunitas yang Aktif</h4>
+            <p>
+              Banyak yang sudah mencoba dan terus kembali tiap hari.
+              Kamu siap ikut panen koin?
+            </p>
+            <div class="divider"></div>
+            <a class="cta cta-variant-2"
+               href="https://h5.vo7770.com?chn=aDVfdm83NzdfY3Qz&id=NDM3OTAzMjMx"
+               target="_blank" rel="noopener noreferrer">
+              ▶&ensp;Main Sekarang
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Warning -->
+      <section class="warning" aria-label="Perhatian">
+        <div class="warning-inner">
+          <div class="warning-badge">⚠ Perhatian</div>
+          <h3 class="warning-title">Main untuk hiburan. Gunakan dengan bijak.</h3>
+          <p class="warning-sub">
+            Halaman ini bersifat informatif. Nikmati sebagai hiburan dan gunakan secara bertanggung jawab.
+          </p>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer>
+        <div class="visitor-row">
+          <span class="visitor-icon" aria-hidden="true">👥</span>
+          <span class="visitor-label">Visitor hari ini:</span>
+          <span id="visitorCounter" class="visitor-counter" aria-live="polite">—</span>
+        </div>
+        <p class="footer-note">Main untuk hiburan. Gunakan dengan bijak.</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Member Modal -->
+  <div class="modal" id="memberModal" role="dialog" aria-modal="true" aria-labelledby="memberModalTitle" hidden>
+    <div class="modal-backdrop" data-close="true" aria-hidden="true"></div>
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <div class="modal-title" id="memberModalTitle">Member Login</div>
+          <div class="modal-sub">Demo saja — login aman memerlukan backend.</div>
+        </div>
+        <button class="modal-x" type="button" data-close="true" aria-label="Tutup">✕</button>
+      </div>
+      <div class="modal-body">
+        <form class="form" id="loginForm">
+          <label class="label">
+            Username
+            <input name="username" placeholder="contoh: member" autocomplete="username" required />
+          </label>
+          <label class="label">
+            Password
+            <input name="password" placeholder="••••••••" type="password" autocomplete="current-password" required />
+          </label>
+          <div class="row">
+            <button class="btn" type="submit">Login</button>
+            <button class="btn btn--ghost" type="button" id="btnLogout">Logout</button>
+          </div>
+          <p class="hint" id="loginMsg" aria-live="polite"></p>
+        </form>
+        <div class="divider" style="margin:16px 0;"></div>
+        <div class="member-card" id="memberBox" aria-live="polite">
+          <div class="member-row">
+            <span class="member-k">Status</span>
+            <span class="member-v" id="memberStatus">Belum login</span>
+          </div>
+          <div class="member-row">
+            <span class="member-k">Username</span>
+            <span class="member-v" id="memberUser">—</span>
+          </div>
+          <div class="member-content" id="memberContent" style="display:none;">
+            <div class="alert">✅ Akses member aktif (demo).</div>
+            <ul class="checklist" style="margin-top:12px;">
+              <li>Chat admin (placeholder)</li>
+              <li>Pengumuman member (placeholder)</li>
+              <li>Menu download (placeholder)</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </section>
-
-    <footer>
-      <p>Main untuk hiburan. Gunakan dengan bijak.</p>
-      <p style="margin-top:8px;font-size:11px;color:#3a3a3a;">© 2024 Tembak Ikan Gacor. Semua hak dilindungi.</p>
-    </footer>
+      <div class="modal-foot">
+        <div class="small">Tips: password minimal 4 karakter untuk login demo.</div>
+      </div>
+    </div>
   </div>
 
   <script>
-    // ===== SOUND TOGGLE =====
-    const soundToggle = document.getElementById('soundToggle');
-    let isSoundOn = false; // off by default (autoplay policy)
-    soundToggle.classList.add('muted');
-
-    soundToggle.addEventListener('click', () => {
-      isSoundOn = !isSoundOn;
-      soundToggle.classList.toggle('muted', !isSoundOn);
-    });
-
-    document.querySelectorAll('.cta').forEach(cta => {
-      cta.addEventListener('click', () => {
-        if (!isSoundOn) return;
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.frequency.setValueAtTime(880, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.15);
-        gain.gain.setValueAtTime(0.2, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-        osc.start(ctx.currentTime);
-        osc.stop(ctx.currentTime + 0.3);
-      });
-    });
-
-    // ===== LIVE COUNTER =====
-    const winCountEl = document.getElementById('winCount');
-    let count = 1248;
-    setInterval(() => {
-      count += Math.floor(Math.random() * 8) + 3;
-      winCountEl.textContent = count.toLocaleString('id-ID');
-    }, 1200);
-
-    // ===== TESTIMONIAL SLIDER =====
-    const slides = document.querySelectorAll('.testimonial-slide');
-    let currentSlide = 0;
-    setInterval(() => {
-      slides[currentSlide].classList.remove('active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add('active');
-    }, 5000);
-
-    // ===== REDUCE MOTION =====
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const style = document.createElement('style');
-      style.textContent = '*, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }';
-      document.head.appendChild(style);
-    }
+    (function () {
+      try {
+        var key = 'visitor_counter_daily_v1';
+        var now = new Date();
+        var dayKey = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
+        var payload = JSON.parse(localStorage.getItem(key) || '{}');
+        if (!payload || typeof payload !== 'object') payload = {};
+        if (payload.day !== dayKey) { payload.day = dayKey; payload.count = 0; }
+        payload.count = (Number(payload.count) || 0) + 1;
+        localStorage.setItem(key, JSON.stringify(payload));
+        var el = document.getElementById('visitorCounter');
+        if (el) el.textContent = payload.count.toLocaleString('id-ID');
+      } catch(e) {}
+    })();
   </script>
 </body>
 </html>
