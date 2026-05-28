@@ -106,6 +106,26 @@
         </div>
       </section>
 
+      <!-- Testimonial Carousel -->
+      <section class="section testimonial-section" aria-label="Ulasan pemenang">
+        <div class="section-head">
+          <div>
+            <span class="section-label">Ulasan Pemenang</span>
+            <h3>Orang yang Sudah Menang Banyak</h3>
+          </div>
+        </div>
+        <div class="testimonial-carousel">
+          <div class="testimonial-carousel-inner" id="testimonialCarousel">
+            <!-- Carousel akan di-populate oleh JS -->
+          </div>
+          <div class="carousel-controls">
+            <button class="carousel-btn carousel-btn-prev" type="button" id="carouselPrev" aria-label="Previous">❮</button>
+            <button class="carousel-btn carousel-btn-next" type="button" id="carouselNext" aria-label="Next">❯</button>
+          </div>
+          <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+      </section>
+
       <!-- Server Section -->
       <section id="serverSection" class="section" aria-label="Pilih server">
         <div class="section-head">
@@ -285,48 +305,79 @@
       <div class="modal-head">
         <div>
           <div class="modal-title" id="memberModalTitle">Member Login</div>
-          <div class="modal-sub">Demo saja — login aman memerlukan backend.</div>
+          <div class="modal-sub">Register atau login untuk main.</div>
         </div>
         <button class="modal-x" type="button" data-close="true" aria-label="Tutup">✕</button>
       </div>
+      <div class="modal-tabs">
+        <button class="modal-tab active" type="button" data-tab="login">Login</button>
+        <button class="modal-tab" type="button" data-tab="register">Register</button>
+      </div>
       <div class="modal-body">
-        <form class="form" id="loginForm">
-          <label class="label">
-            Username
-            <input name="username" placeholder="contoh: member" autocomplete="username" required />
-          </label>
-          <label class="label">
-            Password
-            <input name="password" placeholder="••••••••" type="password" autocomplete="current-password" required />
-          </label>
-          <div class="row">
-            <button class="btn" type="submit">Login</button>
-            <button class="btn btn--ghost" type="button" id="btnLogout">Logout</button>
+        <!-- Login Form -->
+        <div class="modal-tab-content active" data-tab-content="login">
+          <form class="form" id="loginForm">
+            <label class="label">
+              Username
+              <input name="username" placeholder="contoh: member" autocomplete="username" required />
+            </label>
+            <label class="label">
+              Password
+              <input name="password" placeholder="••••••••" type="password" autocomplete="current-password" required />
+            </label>
+            <div class="row">
+              <button class="btn" type="submit">Login</button>
+              <button class="btn btn--ghost" type="button" id="btnLogout">Logout</button>
+            </div>
+            <p class="hint" id="loginMsg" aria-live="polite"></p>
+          </form>
+          <div class="divider" style="margin:16px 0;"></div>
+          <div class="member-card" id="memberBox" aria-live="polite">
+            <div class="member-row">
+              <span class="member-k">Status</span>
+              <span class="member-v" id="memberStatus">Belum login</span>
+            </div>
+            <div class="member-row">
+              <span class="member-k">Username</span>
+              <span class="member-v" id="memberUser">—</span>
+            </div>
+            <div class="member-content" id="memberContent" style="display:none;">
+              <div class="alert">✅ Akses member aktif.</div>
+              <ul class="checklist" style="margin-top:12px;">
+                <li>Akun tersimpan lokal</li>
+                <li>Main kapan saja</li>
+                <li>Pencatat ulasan Anda</li>
+              </ul>
+            </div>
           </div>
-          <p class="hint" id="loginMsg" aria-live="polite"></p>
-        </form>
-        <div class="divider" style="margin:16px 0;"></div>
-        <div class="member-card" id="memberBox" aria-live="polite">
-          <div class="member-row">
-            <span class="member-k">Status</span>
-            <span class="member-v" id="memberStatus">Belum login</span>
-          </div>
-          <div class="member-row">
-            <span class="member-k">Username</span>
-            <span class="member-v" id="memberUser">—</span>
-          </div>
-          <div class="member-content" id="memberContent" style="display:none;">
-            <div class="alert">✅ Akses member aktif (demo).</div>
-            <ul class="checklist" style="margin-top:12px;">
-              <li>Chat admin (placeholder)</li>
-              <li>Pengumuman member (placeholder)</li>
-              <li>Menu download (placeholder)</li>
-            </ul>
-          </div>
+        </div>
+
+        <!-- Register Form -->
+        <div class="modal-tab-content" data-tab-content="register">
+          <form class="form" id="registerForm">
+            <label class="label">
+              Username
+              <input name="reg-username" placeholder="Pilih username" autocomplete="username" required />
+            </label>
+            <label class="label">
+              Email (opsional)
+              <input name="reg-email" placeholder="email@example.com" type="email" autocomplete="email" />
+            </label>
+            <label class="label">
+              Password
+              <input name="reg-password" placeholder="••••••••" type="password" autocomplete="new-password" required />
+            </label>
+            <label class="label">
+              Konfirmasi Password
+              <input name="reg-password-confirm" placeholder="••••••••" type="password" required />
+            </label>
+            <button class="btn" type="submit">Register</button>
+            <p class="hint" id="registerMsg" aria-live="polite"></p>
+          </form>
         </div>
       </div>
       <div class="modal-foot">
-        <div class="small">Tips: password minimal 4 karakter untuk login demo.</div>
+        <div class="small">💾 Data tersimpan di browser lokal Anda.</div>
       </div>
     </div>
   </div>

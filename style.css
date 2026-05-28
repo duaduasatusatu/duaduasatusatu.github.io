@@ -580,6 +580,108 @@ body {
   .ad-placeholder { min-height: 240px; }
 }
 
+/* ─── Testimonial Carousel ───────────────────────── */
+.testimonial-section { margin-top: 56px; }
+
+.testimonial-carousel {
+  position: relative;
+  background: linear-gradient(135deg, rgba(99, 102, 241, .08), rgba(56, 189, 248, .04));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  overflow: hidden;
+}
+
+.testimonial-carousel-inner {
+  display: flex;
+  transition: opacity .5s ease-in-out;
+}
+
+.testimonial-item {
+  min-width: 100%;
+  opacity: 0;
+  transition: opacity .5s ease-in-out;
+}
+
+.testimonial-item.active {
+  opacity: 1;
+}
+
+.testimonial-content {
+  text-align: center;
+  padding: 20px;
+}
+
+.testimonial-text {
+  font-size: 16px;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.testimonial-author {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.testimonial-amount {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.carousel-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.carousel-btn:hover {
+  border-color: var(--border2);
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.carousel-dot.active {
+  background: var(--accent);
+}
+
+.carousel-dot:hover {
+  background: rgba(167, 139, 250, .6);
+}
+
 /* ─── Footer ─────────────────────────────────────── */
 footer {
   margin-top: 56px;
@@ -659,6 +761,45 @@ input:focus, textarea:focus {
   border-color: rgba(167,139,250,.4);
   box-shadow: 0 0 0 3px rgba(167,139,250,.1);
 }
+
+/* Modal Tabs */
+.modal-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+}
+
+.modal-tab {
+  flex: 1;
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+
+.modal-tab:hover {
+  color: var(--text);
+}
+
+.modal-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.modal-tab-content {
+  display: none;
+}
+
+.modal-tab-content.active {
+  display: block;
+}
+
 .row { display: flex; gap: 10px; flex-wrap: wrap; }
 .btn {
   display: inline-flex;
