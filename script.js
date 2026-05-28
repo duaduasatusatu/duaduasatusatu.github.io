@@ -29,8 +29,11 @@ const io = new IntersectionObserver((entries) => {
 sections.forEach(s => io.observe(s));
 
 window.addEventListener('scroll', () => {
-  header.dataset.elevated = window.scrollY > 10 ? 'true' : 'false';
+  if (header && header.dataset) {
+    header.dataset.elevated = window.scrollY > 10 ? 'true' : 'false';
+  }
 });
+
 
 // Smooth scroll
 qsa('a[href^="#"]').forEach(a => {
