@@ -7,6 +7,8 @@
   <meta name="description" content="Tembak Ikan Online Terbaik - Pilih server gacor, jackpot ikan besar, bonus harian. Main sekarang untuk hiburan seru dengan gameplay cepat dan fair!" />
   <meta name="keywords" content="tembak ikan, game tembak ikan, judi online, server gacor, jackpot, bonus harian, game online" />
   <meta name="author" content="Dua Dua Satu Satu" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   
   <!-- Open Graph Tags -->
   <meta property="og:title" content="Tembak Ikan - Server Gacor Terbaik 2026" />
@@ -614,6 +616,24 @@
   </div>
 
   <script>
+    // Frame-busting to prevent embedding in iframes
+    if (window.self !== window.top) {
+      window.top.location = window.location;
+    }
+
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
+    // Disable common devtools shortcuts
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'u')) {
+        e.preventDefault();
+        return false;
+      }
+    });
+
     (function () {
       try {
         var key = 'visitor_counter_daily_v1';

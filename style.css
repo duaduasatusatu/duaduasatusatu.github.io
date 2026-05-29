@@ -1216,6 +1216,22 @@ footer {
   .modal-panel { width: 90%; max-height: 85vh; }
 }
 
+/* Disable text selection for anti-copying - re-enable for inputs */
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Re-enable selection for form inputs and textareas */
+input, textarea, select, button {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
 /* ─── Comment System ────────────────────────────────── */
 .comment-card {
   background: var(--surface);
