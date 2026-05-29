@@ -322,3 +322,275 @@ qsa('a[href^="#"]').forEach(a => {
     // Silent error for visitor counter
   }
 })();
+
+// Admin Authentication
+(function () {
+  const ADMIN_USERNAME = 'Adeovalin2211';
+  const ADMIN_PASSWORD = 'Brebes25';
+  const ADMIN_AUTH_KEY = 'admin_demo_auth_v1';
+  
+  const adminModal = qs('#adminModal');
+  const btnOpenAdmin = qs('#btnOpenAdmin');
+  const adminLoginForm = qs('#adminLoginForm');
+  const adminLoginMsg = qs('#adminLoginMsg');
+  const adminPanel = qs('#adminPanel');
+  const btnAdminLogout = qs('#btnAdminLogout');
+  const pendingComments = qs('#pendingComments');
+  
+  // Check if admin is logged in
+  function isAdminLoggedIn() {
+    try {
+      const payload = JSON.parse(localStorage.getItem(ADMIN_AUTH_KEY) || 'null');
+      return payload && payload.username === ADMIN_USERNAME;
+    } catch (e) {
+      return false;
+    }
+  }
+  
+  // Show admin button only if admin logged in
+  function updateAdminButton() {
+    if (btnOpenAdmin) {
+      btnOpenAdmin.style.display = isAdminLoggedIn() ? 'inline-flex' : 'none';
+    }
+  }
+  
+  // Open admin modal
+  if (btnOpenAdmin && adminModal) {
+    btnOpenAdmin.addEventListener('click', () => {
+      adminModal.hidden = false;
+      adminModal.dataset.open = 'true';
+    });
+  }
+  
+  // Close admin modal
+  if (adminModal) {
+    adminModal.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target && target.getAttribute && target.getAttribute('data-close') === 'true') {
+        adminModal.hidden = true;
+      }
+    });
+    
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !adminModal.hidden) {
+        adminModal.hidden = true;
+      }
+    });
+  }
+  
+  // Admin login handling
+  if (adminLoginForm) {
+    adminLoginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const form = new FormData(adminLoginForm);
+      const username = String(form.get('admin-username') || '').trim();
+      const password = String(form.get('admin-password') || '').trim();
+      
+      if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+        localStorage.setItem(ADMIN_AUTH_KEY, JSON.stringify({ username, t: Date.now() }));
+        adminLoginMsg.textContent = 'Login admin berhasil!';
+        adminPanel.style.display = 'block';
+        adminLoginForm.style.display = 'none';
+        updateAdminButton();
+        renderPendingComments();
+      } else {
+        adminLoginMsg.textContent = 'Username atau password admin salah!';
+      }
+    });
+  }
+  
+  // Admin logout
+  if (btnAdminLogout) {
+    btnAdminLogout.addEventListener('click', () => {
+      localStorage.removeItem(ADMIN_AUTH_KEY);
+      adminPanel.style.display = 'none';
+      adminLoginForm.style.display = 'block';
+      adminLoginForm.reset();
+      adminLoginMsg.textContent = 'Logout admin berhasil.';
+      adminModal.hidden = true;
+      updateAdminButton();
+    });
+  }
+  
+  // Comment System
+  const COMMENTS_KEY = 'comments_demo_v1';
+  
+  function loadComments() {
+    try {
+      const data = localStorage.getItem(COMMENTS_KEY);
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+  
+  function saveComments(comments) {
+    try {
+      localStorage.setItem(COMMENTS_KEY, JSON.stringify(comments));
+    } catch (e) {}
+  }
+  
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  function renderPendingComments() {
+    if (!pendingComments) return;
+    
+    const comments = loadComments();
+    const pending = comments.filter(c => !c.approved);
+    
+    if (pending.length === 0) {
+      pendingComments.innerHTML = '<p class="empty-state">Tidak ada komentar yang menunggu persetujuan.</p>';
+      return;
+    }
+    
+    pendingComments.innerHTML = pending.map((comment, index) => `
+      <div class="comment-card card">
+        <div class="comment-header">
+          <span class="comment-user">${escapeHtml(comment.username)}</span>
+          <span class="comment-time">${new Date(comment.timestamp).toLocaleString('id-ID')}</span>
+        </div>
+        <div class="comment-text">${escapeHtml(comment.text)}</div>
+        <div class="comment-actions">
+          <button class="btn btn--approve" data-index="${index}">Setujui</button>
+          <button class="btn btn--reject" data-index="${index}">Tolak</button>
+        </div>
+      </div>
+    `).join('');
+    
+    // Add event listeners for approve/reject buttons
+    qsa('.btn--approve').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.index);
+        approveComment(idx);
+      });
+    });
+    
+    qsa('.btn--reject').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.index);
+        rejectComment(idx);
+      });
+    });
+  }
+  
+  function approveComment(index) {
+    const comments = loadComments();
+    const pending = comments.filter(c => !c.approved);
+    const commentToApprove = pending[index];
+    
+    if (!commentToApprove) return;
+    
+    const commentIdx = comments.findIndex(c => c.id === commentToApprove.id);
+    if (commentIdx > -1) {
+      comments[commentIdx].approved = true;
+      saveComments(comments);
+      renderPendingComments();
+      renderApprovedComments();
+      adminLoginMsg.textContent = 'Komentar disetujui!';
+    }
+  }
+  
+  function rejectComment(index) {
+    const comments = loadComments();
+    const pending = comments.filter(c => !c.approved);
+    const commentToReject = pending[index];
+    
+    if (!commentToReject) return;
+    
+    const commentIdx = comments.findIndex(c => c.id === commentToReject.id);
+    if (commentIdx > -1) {
+      comments.splice(commentIdx, 1);
+      saveComments(comments);
+      renderPendingComments();
+      adminLoginMsg.textContent = 'Komentar ditolak!';
+    }
+  }
+  
+  function renderApprovedComments() {
+    const commentsList = qs('#commentsList');
+    if (!commentsList) return;
+    
+    const comments = loadComments();
+    const approved = comments.filter(c => c.approved);
+    
+    if (approved.length === 0) {
+      commentsList.innerHTML = '<p class="empty-state">Belum ada komentar yang disetujui.</p>';
+      return;
+    }
+    
+    commentsList.innerHTML = approved.map(comment => `
+      <div class="comment-card card">
+        <div class="comment-header">
+          <span class="comment-user">${escapeHtml(comment.username)}</span>
+          <span class="comment-time">${new Date(comment.timestamp).toLocaleString('id-ID')}</span>
+        </div>
+        <div class="comment-text">${escapeHtml(comment.text)}</div>
+      </div>
+    `).join('');
+  }
+  
+  // Comment form handling
+  const commentForm = qs('#commentForm');
+  const commentMsg = qs('#commentMsg');
+  const commentFormWrapper = qs('#commentFormWrapper');
+  const commentLoginMsg = qs('#commentLoginMsg');
+  
+  // Show comment form for logged-in members
+  function updateCommentFormVisibility() {
+    const isMemberLoggedIn = !!JSON.parse(localStorage.getItem(AUTH_KEY) || 'null');
+    if (commentFormWrapper) {
+      commentFormWrapper.style.display = isMemberLoggedIn ? 'block' : 'none';
+    }
+    if (commentLoginMsg) {
+      commentLoginMsg.style.display = isMemberLoggedIn ? 'none' : 'block';
+    }
+  }
+  
+  if (commentForm) {
+    commentForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const form = new FormData(commentForm);
+      const text = String(form.get('comment-text') || '').trim();
+      
+      if (!text) {
+        commentMsg.textContent = 'Komentar tidak boleh kosong!';
+        return;
+      }
+      
+      const authData = JSON.parse(localStorage.getItem(AUTH_KEY) || 'null');
+      const username = authData?.username || 'Anonymous';
+      
+      const comments = loadComments();
+      comments.push({
+        id: Date.now() + Math.random(),
+        text: text,
+        username: username,
+        timestamp: Date.now(),
+        approved: false
+      });
+      saveComments(comments);
+      
+      commentForm.reset();
+      commentMsg.textContent = 'Komentar terkirim, menunggu persetujuan admin!';
+      renderPendingComments();
+    });
+  }
+  
+  // Initialize
+  updateAdminButton();
+  updateCommentFormVisibility();
+  renderApprovedComments();
+  
+  // Listen for auth changes
+  window.addEventListener('storage', () => {
+    updateAdminButton();
+    updateCommentFormVisibility();
+    renderPendingComments();
+  });
+})();
