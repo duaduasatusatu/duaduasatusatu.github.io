@@ -1016,3 +1016,69 @@ footer {
   .section-head { margin-bottom: 24px; }
   .modal-panel { width: 90%; max-height: 85vh; }
 }
+
+/* ─── Comment System ────────────────────────────────── */
+.comment-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.comment-user {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.comment-time {
+  color: var(--soft);
+}
+
+.comment-text {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn--approve {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+.btn--approve:hover {
+  background: var(--gold2);
+}
+
+.btn--reject {
+  background: var(--danger);
+  color: var(--text);
+}
+
+.btn--reject:hover {
+  background: #fb923c;
+}
+
+.comments-list {
+  margin-top: 20px;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+  padding: 20px;
+}
