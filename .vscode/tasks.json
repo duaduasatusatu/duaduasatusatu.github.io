@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Deploy to Vercel",
+      "type": "shell",
+      "command": "git",
+      "args": ["push", "origin", "main"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

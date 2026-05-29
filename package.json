@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "javascript-obfuscator": "^5.4.3"
+  },
+  "devDependencies": {
+    "vercel": "^54.6.1"
+  },
+  "scripts": {
+    "deploy": "vercel --prod"
+  }
+}
