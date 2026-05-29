@@ -28,6 +28,11 @@ function setupAPIAuth() {
       const email = String(form.get('username') || '').trim();
       const password = String(form.get('password') || '').trim();
       
+      if (!email || password.length < 4) {
+        loginMsg.textContent = 'Email dan password (min 4 karakter) wajib diisi.';
+        return;
+      }
+      
       const result = await apiRequest('login', email, password);
       if (result.error) {
         loginMsg.textContent = result.error;
@@ -45,6 +50,17 @@ function setupAPIAuth() {
       const form = new FormData(registerForm);
       const email = String(form.get('reg-username') || '').trim();
       const password = String(form.get('reg-password') || '').trim();
+      const passwordConfirm = String(form.get('reg-password-confirm') || '').trim();
+      
+      if (!email || !password || password.length < 4) {
+        registerMsg.textContent = 'Email dan password (min 4 karakter) wajib diisi.';
+        return;
+      }
+      
+      if (password !== passwordConfirm) {
+        registerMsg.textContent = 'Password tidak cocok.';
+        return;
+      }
       
       const result = await apiRequest('register', email, password);
       if (result.error) {
