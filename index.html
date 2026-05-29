@@ -72,6 +72,10 @@
           <span aria-hidden="true">🔒</span>
           <span class="iconbtn-t">Member</span>
         </button>
+        <button class="iconbtn iconbtn--admin" type="button" id="btnOpenAdmin" aria-haspopup="dialog" style="display:none;">
+          <span aria-hidden="true">⚙️</span>
+          <span class="iconbtn-t">Admin</span>
+        </button>
       </div>
     </div>
   </header>
@@ -142,6 +146,40 @@
             <button class="carousel-btn carousel-btn-next" type="button" id="carouselNext" aria-label="Testimonial selanjutnya">❯</button>
           </div>
           <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+      </section>
+
+      <!-- Comments Section -->
+      <section class="section comments-section" aria-label="Komentar member">
+        <div class="section-head">
+          <div>
+            <span class="section-label">Komentar</span>
+            <h3>Cerita Pemain Lain</h3>
+          </div>
+        </div>
+        
+        <!-- Comment Form (Member Only) -->
+        <div class="comment-form-wrapper" id="commentFormWrapper" style="display:none;">
+          <div class="card">
+            <h4>Bagikan Pengalamanmu</h4>
+            <form class="form" id="commentForm">
+              <label class="label">
+                <input name="comment-text" placeholder="Tulis komentar atau ulasan kamu..." maxlength="500" required />
+              </label>
+              <button class="btn" type="submit">Kirim Komentar (Perlu Persetujuan Admin)</button>
+              <p class="hint" id="commentMsg" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+
+        <!-- Message for Non-Members -->
+        <div class="card" id="commentLoginMsg" style="text-align:center; color: #8892b0;">
+          <p>📝 <strong>Member bisa kirim komentar!</strong><br>Login terlebih dahulu untuk berbagi pengalaman kamu.</p>
+        </div>
+
+        <!-- Approved Comments Display -->
+        <div id="commentsList" class="comments-list">
+          <!-- Approved comments will be populated here -->
         </div>
       </section>
 
@@ -365,7 +403,7 @@
               <ul class="checklist" style="margin-top:12px;">
                 <li>Akun tersimpan lokal</li>
                 <li>Main kapan saja</li>
-                <li>Pencatat ulasan Anda</li>
+                <li>Bisa kirim komentar</li>
               </ul>
             </div>
           </div>
@@ -397,6 +435,48 @@
       </div>
       <div class="modal-foot">
         <div class="small">💾 Data tersimpan di browser lokal Anda.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Modal -->
+  <div class="modal" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle" hidden>
+    <div class="modal-backdrop" data-close="true" aria-hidden="true"></div>
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <div class="modal-title" id="adminModalTitle">Admin Panel</div>
+          <div class="modal-sub">Kelola komentar dan persetujuan.</div>
+        </div>
+        <button class="modal-x" type="button" data-close="true" aria-label="Tutup">✕</button>
+      </div>
+      <div class="modal-body">
+        <!-- Admin Login -->
+        <div id="adminLoginForm" class="admin-form">
+          <form class="form" id="adminLoginForm">
+            <label class="label">
+              Username Admin
+              <input name="admin-username" placeholder="Username" autocomplete="username" required />
+            </label>
+            <label class="label">
+              Password Admin
+              <input name="admin-password" placeholder="••••••••" type="password" autocomplete="current-password" required />
+            </label>
+            <button class="btn" type="submit">Login Admin</button>
+            <p class="hint" id="adminLoginMsg" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <!-- Admin Panel (After Login) -->
+        <div id="adminPanel" style="display:none;">
+          <div style="margin-bottom:16px;">
+            <h4>Komentar Menunggu Persetujuan</h4>
+            <div id="pendingComments" class="pending-comments">
+              <!-- Pending comments will appear here -->
+            </div>
+          </div>
+          <button class="btn btn--ghost" type="button" id="btnAdminLogout">Logout Admin</button>
+        </div>
       </div>
     </div>
   </div>
