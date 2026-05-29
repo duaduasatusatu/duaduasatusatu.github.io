@@ -300,6 +300,19 @@ qsa('a[href^="#"]').forEach(a => {
   });
 });
 
+// FAQ Accordion functionality
+qsa('.faq-question').forEach(question => {
+  question.addEventListener('click', () => {
+    const isExpanded = question.getAttribute('aria-expanded') === 'true';
+    question.setAttribute('aria-expanded', !isExpanded);
+    
+    const answer = question.nextElementSibling;
+    if (answer && answer.classList.contains('faq-answer')) {
+      answer.classList.toggle('active');
+    }
+  });
+});
+
 // Visitor counter
 (function () {
   try {
