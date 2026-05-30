@@ -1,5 +1,5 @@
-.continue/
-node_modules/
+.continue
+node_modules
 package-lock.json
 .env.local
 .env
