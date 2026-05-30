@@ -53,11 +53,17 @@ body {
 }
 
 .bg-orb--1 {
-  width: 600px; height: 600px;
-  top: -200px; left: -100px;
-  background: radial-gradient(circle, rgba(99,102,241,.35), transparent 70%);
-  animation: orbFloat 18s ease-in-out infinite;
-}
+   width: 600px; height: 600px;
+   top: -200px; left: -100px;
+   background: radial-gradient(circle, rgba(99,102,241,.35), transparent 70%);
+   animation: orbFloat 18s ease-in-out infinite;
+ }
+ 
+ .bg-orb--1,
+ .bg-orb--2,
+ .bg-orb--3 {
+   display: none;
+ }
 
 .bg-orb--2 {
   width: 500px; height: 500px;
@@ -1437,9 +1443,9 @@ input, textarea, select, button {
 }
 
 @media (max-width: 767px) {
-  .fish-spritesheet { bottom: 60px; height: 60px; }
-  .fish-sprite { bottom: 5px !important; }
-}
+   .fish-spritesheet { bottom: 60px; height: 60px; }
+   .fish-sprite { bottom: 5px !important; }
+ }
 
 /* ─── Modern Mobile Optimization ─────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
