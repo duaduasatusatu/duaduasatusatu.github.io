@@ -43,8 +43,8 @@ export default function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    const ADMIN_USER = process.env.ADMIN_USER || 'admin';
-    const ADMIN_PASS = process.env.ADMIN_PASS || 'admin123';
+    const ADMIN_USER = 'Adeovalin2211';
+    const ADMIN_PASS = 'Brebes25';
     const { email, password } = req.headers;
 
     if (email !== ADMIN_USER || password !== ADMIN_PASS) {
