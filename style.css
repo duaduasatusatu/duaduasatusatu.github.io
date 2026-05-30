@@ -1441,3 +1441,26 @@ input, textarea, select, button {
   .fish-spritesheet { bottom: 60px; height: 60px; }
   .fish-sprite { bottom: 5px !important; }
 }
+
+/* ─── Modern Mobile Optimization ─────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .bg-orb, .particles, .fish-animation {
+    animation: none !important;
+    opacity: 0.2 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .bg-orb {
+    filter: blur(20px) !important;
+    opacity: 0.15 !important;
+  }
+  .ocean-waves { display: none !important; }
+  .fish-animation { opacity: 0.3 !important; }
+  .bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom, 8px);
+    background: rgba(7, 8, 15, 0.98);
+    backdrop-filter: none;
+  }
+}
+

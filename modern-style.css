@@ -1,0 +1,66 @@
+/* Modern CSS for Tembak Ikan - Mobile Optimized */
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile Performance Optimizations */
+@media (max-width: 767px) {
+  .bg-orb {
+    filter: blur(30px) !important;
+    opacity: 0.2 !important;
+    animation: none !important;
+  }
+  
+  .fish-animation,
+  .particles {
+    opacity: 0.3 !important;
+  }
+  
+  .ocean-waves {
+    display: none !important;
+  }
+  
+  .bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom, 8px);
+    backdrop-filter: none;
+    background: rgba(7, 8, 15, 0.98);
+  }
+}
+
+/* Container Queries for Server Cards - requires container-type on parent */
+@container (max-width: 300px) {
+  .server {
+    padding: 16px !important;
+  }
+  
+  .server .label {
+    font-size: 13px !important;
+  }
+}
+
+/* Container Queries for Features Grid */
+@container (min-width: 600px) {
+  .feature {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px;
+}
+
+/* Focus Visible for Accessibility */
+:focus-visible {
+  outline: 2px solid #0ea5e9;
+  outline-offset: 2px;
+}
