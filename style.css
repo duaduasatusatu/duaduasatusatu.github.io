@@ -1311,7 +1311,7 @@ input, textarea, select, button {
 
 .fish-animation {
   position: fixed;
-  bottom: 20px;
+  bottom: 10px;
   z-index: -1;
   opacity: 0.3;
   pointer-events: none;
@@ -1334,7 +1334,7 @@ input, textarea, select, button {
   animation: swimRight 50s linear infinite;
 }
 
-.fish-2:nth-child(2) { bottom: 80px; animation-duration: 60s; }
+.fish-2:nth-child(2) { bottom: 40px; animation-duration: 60s; }
 .fish-2:nth-child(3) { bottom: 160px; animation-duration: 70s; opacity: 0.15; }
 
 .fish-animation {
@@ -1354,7 +1354,7 @@ input, textarea, select, button {
 /* ─── Mobile Bottom Navigation ─────────────────────────── */
 .bottom-nav {
   position: fixed;
-  bottom: 0;
+  bottom: 40px;
   left: 0;
   width: 100%;
   background: rgba(7, 8, 15, 0.95);
@@ -1395,10 +1395,10 @@ input, textarea, select, button {
 /* ─── Fish Spritesheet Animation ─────────────────────────────── */
 .fish-spritesheet {
   position: fixed;
-  bottom: 0;
+  bottom: 40px;
   left: 0;
   width: 100%;
-  height: 100px;
+  height: 80px;
   pointer-events: none;
   z-index: -1;
   overflow: hidden;
@@ -1406,7 +1406,7 @@ input, textarea, select, button {
 
 .fish-sprite {
   position: absolute;
-  bottom: 20px;
+  bottom: 10px;
   width: 60px;
   height: 40px;
   background: url('/images/fish-swimming.svg') no-repeat;
@@ -1415,8 +1415,8 @@ input, textarea, select, button {
   animation: swimSprite 30s linear infinite;
 }
 
-.fish-sprite:nth-child(2) { bottom: 50px; animation-duration: 35s; animation-delay: 2s; }
-.fish-sprite:nth-child(3) { bottom: 80px; animation-duration: 40s; animation-delay: 4s; opacity: 0.4; }
+.fish-sprite:nth-child(2) { bottom: 25px; animation-duration: 35s; animation-delay: 2s; }
+.fish-sprite:nth-child(3) { bottom: 40px; animation-duration: 40s; animation-delay: 4s; opacity: 0.4; }
 .fish-sprite:nth-child(4) { bottom: 40px; animation-duration: 45s; animation-delay: 1s; transform: scaleX(-1); }
 
 @keyframes swimSprite {
@@ -1435,4 +1435,9 @@ input, textarea, select, button {
   48% { transform: translateX(calc(-100vw - 100px)) scaleX(1); }
   52% { transform: translateX(calc(-100vw - 100px)) scaleX(-1); }
   100% { transform: translateX(100px) scaleX(-1); }
+}
+
+@media (max-width: 767px) {
+  .fish-spritesheet { bottom: 60px; height: 60px; }
+  .fish-sprite { bottom: 5px !important; }
 }
