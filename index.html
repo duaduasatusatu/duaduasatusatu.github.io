@@ -652,24 +652,6 @@
   </div>
 
   <script>
-    // Frame-busting to prevent embedding in iframes
-    if (window.self !== window.top) {
-      window.top.location = window.location;
-    }
-
-    // Disable right-click context menu
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    });
-
-    // Disable common devtools shortcuts
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'u')) {
-        e.preventDefault();
-        return false;
-      }
-    });
-
     (function () {
       try {
         var key = 'visitor_counter_daily_v1';
