@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#07080f" rx="72"/>
+  <circle cx="256" cy="256" r="160" fill="#0ea5e9"/>
+  <ellipse cx="200" cy="230" rx="60" ry="45" fill="#ffffff"/>
+  <ellipse cx="312" cy="230" rx="60" ry="45" fill="#ffffff"/>
+  <circle cx="180" cy="218" r="18" fill="#0f172a"/>
+  <circle cx="282" cy="218" r="18" fill="#0f172a"/>
+  <path d="M190 310c80 40 150 0 150 0" stroke="#ffffff" stroke-width="8" fill="none"/>
+  <text x="256" y="400" font-size="60" text-anchor="middle" fill="#a78bfa">🐟 Tembak Ikan</text>
+</svg>
