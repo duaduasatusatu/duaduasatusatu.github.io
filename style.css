@@ -602,51 +602,51 @@ body {
   margin: 0;
 }
 
-/* ─── Ads Section ────────────────────────────────── */
-.ads-section {
-  margin: 80px 0;
-}
-
-.ads-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.ad-box {
-  background: var(--surface2);
-  border: 2px dashed var(--border);
-  border-radius: var(--radius-sm);
-  padding: 32px;
-  text-align: center;
-  min-height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ad-placeholder {
-  display: flex;
+/* ─── Promo Section ────────────────────────────────── */
+ .promo-section {
+   margin: 80px 0;
+ }
+ 
+ .promo-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+   gap: 20px;
+ }
+ 
+ .promo-box {
+   background: var(--surface2);
+   border: 1px solid var(--border);
+   border-radius: var(--radius-sm);
+   padding: 32px;
+   text-align: center;
+   min-height: 200px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
+ 
+ .promo-placeholder {
+   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
 }
 
-.ad-icon {
-  font-size: 32px;
-}
-
-.ad-text h4 {
-  font-size: 16px;
-  margin: 0 0 8px;
-  color: var(--accent);
-}
-
-.ad-text p {
-  font-size: 13px;
-  color: var(--muted);
-  margin: 0;
-}
+.promo-icon {
+   font-size: 32px;
+ }
+ 
+ .promo-text h4 {
+   font-size: 16px;
+   margin: 0 0 8px;
+   color: var(--accent);
+ }
+ 
+ .promo-text p {
+   font-size: 13px;
+   color: var(--muted);
+   margin: 0;
+ }
 
 /* ─── Footer ─────────────────────────────────────── */
 footer {
