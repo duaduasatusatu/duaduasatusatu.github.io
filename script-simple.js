@@ -51,15 +51,25 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // Tab switching
-  document.querySelectorAll('[data-tab]').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const tab = this.dataset.tab;
-      document.querySelectorAll('[data-tab]').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-      document.querySelectorAll('[data-tab-content]').forEach(c => {
-        c.classList.toggle('active', c.dataset.tabContent === tab);
-      });
-    });
-  });
+   document.querySelectorAll('[data-tab]').forEach(btn => {
+     btn.addEventListener('click', function() {
+       const tab = this.dataset.tab;
+       document.querySelectorAll('[data-tab]').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+       document.querySelectorAll('[data-tab-content]').forEach(c => {
+         c.classList.toggle('active', c.dataset.tabContent === tab);
+       });
+     });
+   });
+
+   // FAQ accordion
+   document.querySelectorAll('.faq-question').forEach(button => {
+     button.addEventListener('click', () => {
+       const faqItem = button.parentElement;
+       const isActive = faqItem.classList.contains('active');
+       faqItem.classList.toggle('active');
+       button.setAttribute('aria-expanded', String(!isActive));
+     });
+   });
 });
 
 // Stats simulation
