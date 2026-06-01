@@ -362,7 +362,8 @@ body {
 
 .testimonial-carousel-inner {
   position: relative;
-  height: 120px;
+  min-height: 180px;
+  height: auto;
   display: flex;
   align-items: center;
   margin-bottom: 32px;
