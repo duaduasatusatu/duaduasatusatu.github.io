@@ -119,16 +119,6 @@ function updateTestimonial() {
     dot.classList.toggle('active', index === currentTestimonial);
   });
   
-  // Update testimonial content
-  const testimonial = testimonials[currentTestimonial];
-  carousel.innerHTML = `
-    <div class="testimonial-item ${currentTestimonial === 0 ? 'active' : ''}">
-      <div class="testimonial-text">"${testimonial.text}"</div>
-      <div class="testimonial-author">${testimonial.name}</div>
-      <div class="testimonial-amount">${testimonial.amount}</div>
-    </div>
-  `;
-  
   // Restart interval
   clearInterval(testimonialInterval);
   testimonialInterval = setInterval(nextTestimonial, 5000);
